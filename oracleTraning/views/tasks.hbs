@@ -1,4 +1,12 @@
 <h4>Add  tasks for {{selectedUser.firstName}} {{selectedUser.lastName}}</h4>
+<hr/>
+
+<form method="GET" action="/users/tasks/{{selectedUser._id}}">
+    <input type="hidden" name="userID" value="{{selectedUser._id}}"/>
+    <input type="text" name="search"/>
+    <button type="submit">Search</button>
+</form>
+
 
 <hr/>
 

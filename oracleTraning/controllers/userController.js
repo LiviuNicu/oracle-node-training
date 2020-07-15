@@ -13,10 +13,18 @@ exports.getAllUsers = async function(req,res){
 
 exports.getAllTasksForUser = async function(req,res){
     try{
-        const allTasks = await taskModel.getAllTasksForUser(req.params.user);
+        //req.query
+        let allTasks = [];
+        if(req.query && req.query.search){
+            allTasks = await taskModel.getAllTasksForUserFiltered(req.query)
+        }else{
+             allTasks = await taskModel.getAllTasksForUser(req.params.user);
+        }
+        
         const selectedUser = await userModel.getUserById(req.params.user);
         res.render('tasks',{title:"user tasks",allTasks,selectedUser})
     }catch(err){
+        console.log(err)
         res.status(500).json(err);
     }
 }

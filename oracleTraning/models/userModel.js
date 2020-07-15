@@ -14,6 +14,8 @@ function hashPass(pwd){
     return crypto.createHash('sha256').update(pwd).digest('base64').toString();
 }
 
+exports.User = user;
+
 exports.register = function(userReq) {
     let newUser = new user();
 

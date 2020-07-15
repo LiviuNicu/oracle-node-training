@@ -28,7 +28,18 @@ exports.getAllTasksForUser = function(userId){
             if(err){
                 reject({err});
             }else{
-                console.log(tasks)
+                resolve(tasks);
+            }
+        })
+    })
+}
+
+exports.getAllTasksForUserFiltered = function(params){
+    return new Promise((resolve,reject)=>{
+        Task.find({_user:params.userID, text:{'$regex':params.search, '$options':'i'}}).exec(function(err,tasks){
+            if(err){
+                reject({err});
+            }else{
                 resolve(tasks);
             }
         })
