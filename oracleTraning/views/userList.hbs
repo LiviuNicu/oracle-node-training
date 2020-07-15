@@ -1,0 +1,12 @@
+<h1>Welcome {{loggedUser.firstName}} {{loggedUser.lastName}}</h1>
+
+<ul>
+    {{#each allUsers}}
+    <li>
+        <img src="/images/{{this._id}}.png" width="20"/>
+        {{this.firstName}} {{this.lastName}} 
+        <a href="/users/tasks/{{this._id}}">Go to tasks</a>
+        <a href="/users/profile/{{this._id}}">Go to profile</a>
+    </li>
+    {{/each}}
+</ul>
