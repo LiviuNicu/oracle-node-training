@@ -7,6 +7,10 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-type':'application/json'})
 }
 
+const httpPrivateOptions = {
+  headers: new HttpHeaders({'Content-type':'application/json', 'Authorization':localStorage.getItem('token')})
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +34,15 @@ export class MainService {
       catchError(this.handleError('register'))
       );
   }
+
+  getAllUsers(userObj){
+    return this.http.post(this.url+'/api/allUsers',userObj,httpPrivateOptions)
+    .pipe(
+      tap((response)=>this.log(response)),
+      catchError(this.handleError('getAllUsers'))
+      );
+  }
+  
 
 
 

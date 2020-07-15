@@ -16,3 +16,14 @@ exports.checkToken = (req,res,next)=>{
         return res.status(401).json({message:'Unauthorized!'})
     }
 }
+
+exports.checkTokenWeb = (req,res,next)=>{
+    try{
+        const token = req.cookies['x-auth'];
+        const decoded = jwt.verify(token,JWT_KEY);
+        req.userData = decoded;
+        next();
+    }catch(err){
+        return res.status(401).json({message:'Unauthorized!'})
+    }
+}
